@@ -9,7 +9,7 @@
             background-color: #f2f7f4;
             color: #333;
             line-height: 1.6;
-            padding-top: 100px;
+            padding-top: 120px;
             padding-bottom: 60px;
         }
 
@@ -225,6 +225,8 @@
         .szuro-kontener {
     text-align: center;
     margin-bottom: 25px;
+                    margin-top: 20px;
+                    
 }
 
 .szuro-gomb {
