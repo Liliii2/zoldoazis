@@ -376,3 +376,12 @@ textarea {
         font-size: 11px;
     }
 }
+html {
+    scroll-behavior: smooth;
+}
+
+#viragok,
+#kapcsolat,
+#fooldal {
+    scroll-margin-top: 110px;
+}
