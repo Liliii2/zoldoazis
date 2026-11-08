@@ -342,10 +342,10 @@ ontozesMegjelenitese();
 
 const fejléc = document.querySelector("header");
 
-window.addEventListener("scroll", function() {
+window.addEventListener("scroll", function () {
     if (window.scrollY > 50) {
-        fejléc.classList.add("lekicsinyitett");
+        fejléc.classList.add("elrejtve");
     } else {
-        fejléc.classList.remove("lekicsinyitett");
+        fejléc.classList.remove("elrejtve");
     }
 });
