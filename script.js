@@ -44,8 +44,10 @@ funkciok.innerHTML = `
 
 // A funkciók beszúrása a növények elé
 const viragRacs = document.querySelector(".virag-racs");
-viragRacs.parentNode.insertBefore(funkciok, viragRacs);
-
+viragRacs.parentNode.insertBefore(
+    funkciok,
+    viragRacs.nextSibling
+);
 // Növénykártyák beállítása
 kartyak.forEach(kartya => {
     const nev = kartya.querySelector("h3").textContent;
@@ -335,3 +337,15 @@ topGomb.addEventListener("click", function() {
 szures();
 kedvencekMegjelenitese();
 ontozesMegjelenitese();
+
+// Fejléc címének eltüntetése görgetéskor
+
+const fejléc = document.querySelector("header");
+
+window.addEventListener("scroll", function() {
+    if (window.scrollY > 50) {
+        fejléc.classList.add("lekicsinyitett");
+    } else {
+        fejléc.classList.remove("lekicsinyitett");
+    }
+});
