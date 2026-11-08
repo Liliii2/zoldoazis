@@ -1,414 +1,337 @@
-// NÖVÉNYEK ADATAI
+// A HTML-elemek kiválasztása
+const kartyak = document.querySelectorAll(".kartya");
+const keresoInput = document.getElementById("keresoInput");
+const szuroGombok = document.querySelectorAll(".szuro-gomb");
+const darabSzam = document.getElementById("darabSzam");
 
-const novenyek = [
-    {
-        nev: "Orchidea",
-        kategoria: "viragzo",
-        kep: "🌺",
-        leiras: "Gyönyörű virágú növény, világos helyet szeret."
-    },
-    {
-        nev: "Rózsa",
-        kategoria: "viragzo",
-        kep: "🌹",
-        leiras: "Klasszikus virág, rendszeres gondozást igényel."
-    },
-    {
-        nev: "Vitorlavirág",
-        kategoria: "viragzo",
-        kep: "🌼",
-        leiras: "Fehér virágairól és zöld leveleiről ismert."
-    },
-    {
-        nev: "Monstera",
-        kategoria: "leveles",
-        kep: "🌿",
-        leiras: "Nagy, lyukacsos levelekkel rendelkező szobanövény."
-    },
-    {
-        nev: "Anyósnyelv",
-        kategoria: "leveles",
-        kep: "🪴",
-        leiras: "Kevés gondozást igénylő, ellenálló növény."
-    },
-    {
-        nev: "Aloe vera",
-        kategoria: "leveles",
-        kep: "🌵",
-        leiras: "Pozsgás növény, kevés öntözést igényel."
-    }
-];
+let aktualisKategoria = "mind";
 
-
-// KEDVENCEK BETÖLTÉSE
-
+// Mentett adatok betöltése
 let kedvencek = JSON.parse(localStorage.getItem("kedvencek")) || [];
+let ontozesek = JSON.parse(localStorage.getItem("ontozesek")) || [];
 
+// Új funkciók létrehozása
+const funkciok = document.createElement("div");
+funkciok.className = "uj-funkciok";
 
-// NÖVÉNYEK MEGJELENÍTÉSE
+funkciok.innerHTML = `
+    <div class="funkcio-doboz">
+        <h3>🌱 Növénykvíz</h3>
+        <p>Teszteld a növényismeretedet!</p>
+        <button id="kvizGomb">Kvíz indítása</button>
+        <div id="kvizEredmeny" class="funkcio-eredmeny"></div>
+    </div>
 
-function novenyekMegjelenitese(lista) {
+    <div class="funkcio-doboz">
+        <h3>🌸 Növényteszt</h3>
+        <p>Melyik növény illik hozzád?</p>
+        <button id="tesztGomb">Teszt indítása</button>
+        <div id="tesztEredmeny" class="funkcio-eredmeny"></div>
+    </div>
 
-    let tartalom = "";
+    <div class="funkcio-doboz">
+        <h3>💧 Öntözési emlékeztető</h3>
+        <p>A beállított öntözési dátumaid:</p>
+        <div id="ontozesLista"></div>
+    </div>
 
-    if (lista.length === 0) {
-        tartalom = "<p>Nem található ilyen növény.</p>";
+    <div class="funkcio-doboz">
+        <h3>❤️ Kedvenc növényeim</h3>
+        <p>Itt találod a kedvencnek jelölt növényeidet.</p>
+        <div id="kedvencekLista"></div>
+    </div>
+`;
+
+// A funkciók beszúrása a növények elé
+const viragRacs = document.querySelector(".virag-racs");
+viragRacs.parentNode.insertBefore(funkciok, viragRacs);
+
+// Növénykártyák beállítása
+kartyak.forEach(kartya => {
+    const nev = kartya.querySelector("h3").textContent;
+
+    // Kedvenc gomb létrehozása
+    const kedvencGomb = document.createElement("button");
+    kedvencGomb.className = "kedvenc-gomb";
+
+    function kedvencAllapot() {
+        if (kedvencek.includes(nev)) {
+            kedvencGomb.textContent = "❤️";
+            kedvencGomb.classList.add("kedvenc");
+        } else {
+            kedvencGomb.textContent = "♡";
+            kedvencGomb.classList.remove("kedvenc");
+        }
     }
 
-    lista.forEach(function(noveny) {
+    kedvencAllapot();
+    kartya.appendChild(kedvencGomb);
 
-        let kedvenc = kedvencek.includes(noveny.nev);
+    kedvencGomb.addEventListener("click", function(event) {
+        event.stopPropagation();
 
-        tartalom += `
-            <div class="kartya">
+        if (kedvencek.includes(nev)) {
+            kedvencek = kedvencek.filter(elem => elem !== nev);
+        } else {
+            kedvencek.push(nev);
+        }
 
-                <div class="noveny-kep">${noveny.kep}</div>
+        localStorage.setItem("kedvencek", JSON.stringify(kedvencek));
 
-                <h3>${noveny.nev}</h3>
-
-                <p>${noveny.leiras}</p>
-
-                <button class="kedvenc-gomb"
-                onclick="kedvencValtas('${noveny.nev}')">
-
-                ${kedvenc ? "❤️ Kedvenc" : "🤍 Kedvencekhez"}
-
-                </button>
-
-            </div>
-        `;
+        kedvencAllapot();
+        kedvencekMegjelenitese();
     });
 
-    document.getElementById("novenyek").innerHTML = tartalom;
-}
+    // Öntözés gomb létrehozása
+    const ontozesGomb = document.createElement("button");
+    ontozesGomb.className = "ontozes-gomb";
+    ontozesGomb.textContent = "💧 Öntözés";
 
+    kartya.appendChild(ontozesGomb);
 
-// KERESÉS ÉS KATEGÓRIASZŰRÉS
+    ontozesGomb.addEventListener("click", function(event) {
+        event.stopPropagation();
 
+        const napok = prompt(
+            "Hány nap múlva szeretnéd megöntözni a növényt?"
+        );
+
+        if (napok === null) return;
+
+        const nap = Number(napok);
+
+        if (!Number.isInteger(nap) || nap < 1 || nap > 365) {
+            alert("Kérlek, 1 és 365 közötti egész számot adj meg!");
+            return;
+        }
+
+        const datum = new Date();
+        datum.setDate(datum.getDate() + nap);
+
+        const datumSzoveg = datum.toLocaleDateString("hu-HU");
+
+        ontozesek = ontozesek.filter(elem => elem.nev !== nev);
+
+        ontozesek.push({
+            nev: nev,
+            datum: datumSzoveg
+        });
+
+        localStorage.setItem("ontozesek", JSON.stringify(ontozesek));
+
+        ontozesMegjelenitese();
+
+        alert("Sikeresen beállítottad az öntözési dátumot! 🌱");
+    });
+
+    // Kártya megnyitása és bezárása
+    kartya.addEventListener("click", function(event) {
+        if (event.target.closest("button")) return;
+
+        this.classList.toggle("nyitva");
+    });
+});
+
+// Keresés és szűrés
 function szures() {
+    const keresettSzo = keresoInput.value.toLowerCase();
+    let darab = 0;
 
-    let kereses = document.getElementById("kereses").value.toLowerCase();
+    kartyak.forEach(kartya => {
+        const nev = kartya.querySelector("h3").textContent.toLowerCase();
+        const leiras = kartya.querySelector(".leiras").textContent.toLowerCase();
 
-    let kategoria = document.getElementById("kategoria").value;
+        const tipusSor = Array.from(
+            kartya.querySelectorAll(".leiras p")
+        ).find(p => p.textContent.includes("Típus:"));
 
-    let szurtNovenyek = novenyek.filter(function(noveny) {
+        const tipus = tipusSor ? tipusSor.textContent : "";
 
-        let nevEgyezes = noveny.nev.toLowerCase().includes(kereses);
+        const megfeleloNev =
+            nev.includes(keresettSzo) ||
+            leiras.includes(keresettSzo);
 
-        let kategoriaEgyezes =
-            kategoria === "osszes" || noveny.kategoria === kategoria;
+        let megfeleloKategoria = true;
 
-        return nevEgyezes && kategoriaEgyezes;
+        if (aktualisKategoria === "Benti") {
+            megfeleloKategoria = tipus.includes("Benti növény");
+        }
+
+        if (aktualisKategoria === "Kinti") {
+            megfeleloKategoria = tipus.includes("Kinti növény");
+        }
+
+        if (megfeleloNev && megfeleloKategoria) {
+            kartya.classList.remove("elrejtve");
+            darab++;
+        } else {
+            kartya.classList.add("elrejtve");
+            kartya.classList.remove("nyitva");
+        }
     });
 
-    novenyekMegjelenitese(szurtNovenyek);
+    darabSzam.textContent = darab;
 }
 
-document.getElementById("kereses").addEventListener("input", szures);
+keresoInput.addEventListener("input", szures);
 
-document.getElementById("kategoria").addEventListener("change", szures);
-
-
-// KEDVENCEK KEZELÉSE
-
-function kedvencValtas(nev) {
-
-    if (kedvencek.includes(nev)) {
-
-        kedvencek = kedvencek.filter(function(elem) {
-            return elem !== nev;
+// Szűrőgombok működése
+szuroGombok.forEach(gomb => {
+    gomb.addEventListener("click", function() {
+        szuroGombok.forEach(elem => {
+            elem.classList.remove("active");
         });
 
-    } else {
+        this.classList.add("active");
+        aktualisKategoria = this.dataset.kategoria;
 
-        kedvencek.push(nev);
-    }
+        szures();
+    });
+});
 
-    localStorage.setItem("kedvencek", JSON.stringify(kedvencek));
-
-    szures();
-    kedvencekMegjelenitese();
-}
-
-
+// Kedvencek megjelenítése
 function kedvencekMegjelenitese() {
+    const lista = document.getElementById("kedvencekLista");
+    lista.innerHTML = "";
 
-    let lista = novenyek.filter(function(noveny) {
-        return kedvencek.includes(noveny.nev);
-    });
-
-    let tartalom = "";
-
-    if (lista.length === 0) {
-        tartalom = "<p>Még nincs kedvenc növényed.</p>";
+    if (kedvencek.length === 0) {
+        lista.textContent = "Még nincs kedvenc növényed.";
+        return;
     }
 
-    lista.forEach(function(noveny) {
-
-        tartalom += `
-            <div class="kartya">
-
-                <div class="noveny-kep">${noveny.kep}</div>
-
-                <h3>${noveny.nev}</h3>
-
-                <p>${noveny.leiras}</p>
-
-                <button class="kedvenc-gomb"
-                onclick="kedvencValtas('${noveny.nev}')">
-                    Eltávolítás ❤️
-                </button>
-
-            </div>
-        `;
+    kedvencek.forEach(nev => {
+        const sor = document.createElement("p");
+        sor.className = "kedvenc-sor";
+        sor.textContent = "❤️ " + nev;
+        lista.appendChild(sor);
     });
-
-    document.getElementById("kedvencek-lista").innerHTML = tartalom;
 }
 
-
-// ÖNTÖZÉSI EMLÉKEZTETŐ
-
-let maiNap = new Date().toLocaleDateString("hu-HU");
-
-let mentettOntozes = JSON.parse(localStorage.getItem("ontozesAdatok")) || {};
-
-let meglocsolt = mentettOntozes.datum === maiNap
-    ? mentettOntozes.novenyek
-    : [];
-
-
+// Öntözési dátumok megjelenítése
 function ontozesMegjelenitese() {
+    const lista = document.getElementById("ontozesLista");
+    lista.innerHTML = "";
 
-    let tartalom = "";
+    if (ontozesek.length === 0) {
+        lista.textContent = "Még nincs beállított emlékeztető.";
+        return;
+    }
 
-    novenyek.forEach(function(noveny) {
+    ontozesek.forEach(elem => {
+        const sor = document.createElement("p");
+        sor.className = "ontozes-sor";
+        sor.textContent = "💧 " + elem.nev + " – " + elem.datum;
 
-        let kesz = meglocsolt.includes(noveny.nev);
-
-        tartalom += `
-            <div class="ontozes-elem ${kesz ? "kesz" : ""}">
-
-                <span>${noveny.kep} ${noveny.nev}</span>
-
-                <button onclick="ontozesValtas('${noveny.nev}')">
-
-                    ${kesz ? "✅ Meglocsolva" : "💧 Meglocsoltam"}
-
-                </button>
-
-            </div>
-        `;
+        lista.appendChild(sor);
     });
-
-    document.getElementById("ontozes-lista").innerHTML = tartalom;
 }
 
+// Növénykvíz
+document.getElementById("kvizGomb").addEventListener("click", function() {
+    const kerdesek = [
+        {
+            kerdes: "Melyik növény követi fiatal korában a Nap mozgását?",
+            valaszok: "1. Orchidea\n2. Napraforgó\n3. Tulipán",
+            helyes: "2",
+            magyarazat: "A napraforgó fiatal virágfeje követi a Nap mozgását."
+        },
+        {
+            kerdes: "Melyik növény bírja különösen jól a szárazságot?",
+            valaszok: "1. Kövirózsa\n2. Hortenzia\n3. Vitorlavirág",
+            helyes: "1",
+            magyarazat: "A kövirózsa húsos leveleiben vizet tárol."
+        },
+        {
+            kerdes: "Melyik növény kedveli a párás környezetet?",
+            valaszok: "1. Kaktusz\n2. Flamingóvirág\n3. Levendula",
+            helyes: "2",
+            magyarazat: "A flamingóvirág trópusi növény, ezért szereti a párát."
+        }
+    ];
 
-function ontozesValtas(nev) {
+    const kerdes = kerdesek[Math.floor(Math.random() * kerdesek.length)];
 
-    if (meglocsolt.includes(nev)) {
+    const valasz = prompt(
+        kerdes.kerdes + "\n\n" + kerdes.valaszok
+    );
 
-        meglocsolt = meglocsolt.filter(function(elem) {
-            return elem !== nev;
-        });
+    if (valasz === null) return;
 
+    const eredmeny = document.getElementById("kvizEredmeny");
+
+    if (valasz.trim() === kerdes.helyes) {
+        eredmeny.textContent = "Helyes válasz! Ügyes vagy! 🌸";
     } else {
-
-        meglocsolt.push(nev);
+        eredmeny.textContent = "Nem egészen! " + kerdes.magyarazat;
     }
+});
 
-    let adatok = {
-        datum: maiNap,
-        novenyek: meglocsolt
-    };
+// Milyen növény illik hozzád?
+document.getElementById("tesztGomb").addEventListener("click", function() {
+    const valasz = prompt(
+        "Milyen helyet kedvelsz a legjobban?\n\n" +
+        "1. Napos, meleg helyet\n" +
+        "2. Árnyékos, nyugodt helyet\n" +
+        "3. Világos, otthonos helyet"
+    );
 
-    localStorage.setItem("ontozesAdatok", JSON.stringify(adatok));
+    if (valasz === null) return;
 
-    ontozesMegjelenitese();
-}
+    const eredmeny = document.getElementById("tesztEredmeny");
 
-
-// VIRÁGFELISMERŐ KVÍZ
-
-const kerdesek = [
-    {
-        kerdes: "Melyik növénynek vannak nagy, lyukacsos levelei?",
-        valaszok: ["Orchidea", "Monstera", "Rózsa"],
-        helyes: "Monstera"
-    },
-    {
-        kerdes: "Melyik növény igényel kevés öntözést?",
-        valaszok: ["Aloe vera", "Vitorlavirág", "Orchidea"],
-        helyes: "Aloe vera"
-    },
-    {
-        kerdes: "Melyik növénynek jellegzetesek a fehér virágai?",
-        valaszok: ["Anyósnyelv", "Monstera", "Vitorlavirág"],
-        helyes: "Vitorlavirág"
-    },
-    {
-        kerdes: "Melyik növénynek vannak tüskéi?",
-        valaszok: ["Rózsa", "Orchidea", "Vitorlavirág"],
-        helyes: "Rózsa"
-    },
-    {
-        kerdes: "Melyik növény ismert különleges virágairól?",
-        valaszok: ["Monstera", "Orchidea", "Anyósnyelv"],
-        helyes: "Orchidea"
+    if (valasz.trim() === "1") {
+        eredmeny.textContent = "Hozzád a levendula illik! 💜";
+    } else if (valasz.trim() === "2") {
+        eredmeny.textContent = "Hozzád a vitorlavirág illik! 🌿";
+    } else if (valasz.trim() === "3") {
+        eredmeny.textContent = "Hozzád az orchidea illik! 🌸";
+    } else {
+        eredmeny.textContent = "Kérlek, 1, 2 vagy 3 közül válassz!";
     }
-];
+});
 
-let aktualisKerdes = -1;
-let pontszam = 0;
-let megvalaszolva = false;
+// Kapcsolati űrlap ellenőrzése
+const kapcsolatForm = document.getElementById("kapcsolatForm");
 
+kapcsolatForm.addEventListener("submit", function(event) {
+    event.preventDefault();
 
-// KVÍZ INDÍTÁSA ÉS KÖVETKEZŐ KÉRDÉS
+    const telefon = document.getElementById("telefon").value.trim();
+    const telefonHiba = document.getElementById("telefonHiba");
 
-function kovetkezoKerdes() {
+    const joTelefon = /^06\d{9}$/.test(telefon);
 
-    if (aktualisKerdes === -1 || aktualisKerdes === kerdesek.length) {
-
-        aktualisKerdes = 0;
-        pontszam = 0;
-        megvalaszolva = false;
-
-        document.getElementById("eredmeny").innerHTML = "";
-
-        document.getElementById("kovetkezo").innerHTML = "Következő kérdés";
-
-        kerdesMegjelenitese();
-
+    if (!joTelefon) {
+        telefonHiba.style.display = "block";
         return;
     }
 
-    if (!megvalaszolva) {
-        return;
-    }
+    telefonHiba.style.display = "none";
 
-    aktualisKerdes++;
+    alert("Az űrlap kitöltése sikeres!");
 
-    if (aktualisKerdes < kerdesek.length) {
+    kapcsolatForm.reset();
+});
 
-        megvalaszolva = false;
-        kerdesMegjelenitese();
+// Vissza a tetejére gomb
+const topGomb = document.getElementById("topGomb");
 
+window.addEventListener("scroll", function() {
+    if (window.scrollY > 300) {
+        topGomb.style.display = "block";
     } else {
-
-        document.getElementById("kerdes").innerHTML =
-            "Vége a kvíznek! 🎉";
-
-        document.getElementById("valaszok").innerHTML = "";
-
-        document.getElementById("eredmeny").innerHTML =
-            "Eredményed: " + pontszam + " / " + kerdesek.length + " pont.";
-
-        document.getElementById("kovetkezo").innerHTML =
-            "Újra szeretném játszani";
+        topGomb.style.display = "none";
     }
-}
+});
 
-
-// KÉRDÉS MEGJELENÍTÉSE
-
-function kerdesMegjelenitese() {
-
-    let aktualis = kerdesek[aktualisKerdes];
-
-    document.getElementById("kerdes").innerHTML =
-        (aktualisKerdes + 1) + ". " + aktualis.kerdes;
-
-    let tartalom = "";
-
-    aktualis.valaszok.forEach(function(valasz) {
-
-        tartalom += `
-            <button onclick="valaszEllenorzes('${valasz}')">
-                ${valasz}
-            </button>
-        `;
+topGomb.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
+});
 
-    document.getElementById("valaszok").innerHTML = tartalom;
-
-    document.getElementById("eredmeny").innerHTML = "";
-}
-
-
-// VÁLASZ ELLENŐRZÉSE
-
-function valaszEllenorzes(valasz) {
-
-    if (megvalaszolva) {
-        return;
-    }
-
-    megvalaszolva = true;
-
-    let helyes = kerdesek[aktualisKerdes].helyes;
-
-    if (valasz === helyes) {
-
-        pontszam++;
-
-        document.getElementById("eredmeny").innerHTML =
-            "🎉 Helyes válasz!";
-
-    } else {
-
-        document.getElementById("eredmeny").innerHTML =
-            "❌ Sajnos nem jó! A helyes válasz: " + helyes;
-    }
-
-    document.getElementById("valaszok").innerHTML =
-        "<p>Válaszod: " + valasz + "</p>";
-}
-
-
-// MILYEN NÖVÉNY ILLIK HOZZÁD?
-
-function novenyTeszt() {
-
-    let gondozas = document.getElementById("gondozas").value;
-
-    let tipus = document.getElementById("tipus").value;
-
-    let eredmeny = "";
-
-    if (gondozas === "keves" && tipus === "leveles") {
-
-        eredmeny = "🌵 Neked az Aloe vera illik! Kevés gondozást igényel.";
-
-    } else if (gondozas === "keves" && tipus === "viragzo") {
-
-        eredmeny = "🌺 Neked egy könnyen gondozható virágzó növény illik!";
-
-    } else if (gondozas === "sok" && tipus === "viragzo") {
-
-        eredmeny = "🌹 Neked a rózsa lehet a tökéletes választás!";
-
-    } else if (gondozas === "sok" && tipus === "leveles") {
-
-        eredmeny = "🌿 Neked a Monstera illik, amit rendszeresen gondozhatsz!";
-
-    } else if (tipus === "leveles") {
-
-        eredmeny = "🪴 Neked az Anyósnyelv lehet jó választás!";
-
-    } else {
-
-        eredmeny = "🌸 Neked az Orchideát ajánljuk!";
-    }
-
-    document.getElementById("ajanlas").innerHTML = eredmeny;
-}
-
-
-// OLDAL BETÖLTÉSEKOR
-
-novenyekMegjelenitese(novenyek);
-
+// Kezdeti megjelenítés
+szures();
 kedvencekMegjelenitese();
-
 ontozesMegjelenitese();
