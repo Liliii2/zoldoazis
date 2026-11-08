@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -7,123 +6,387 @@
     <title>Zöld Oázis - Viráglexikon</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-    <h1>🌿 Zöld Oázis</h1>
-    <p>Fedezd fel a növények csodálatos világát!</p>
-
-    <nav>
-        <a href="#galeria">Növények</a>
-        <a href="#kedvencek">Kedvenceim</a>
-        <a href="#ontozes">Öntözés</a>
-        <a href="#kviz">Virágkvíz</a>
-        <a href="#teszt">Növényteszt</a>
-    </nav>
-</header>
-
-<main>
-
-    <section class="bevezeto">
-        <h2>Üdvözöl a Zöld Oázis! 🌱</h2>
-        <p>
-            Ismerd meg a szobanövényeket, tanulj gondozásukról,
-            és találd meg a hozzád legjobban illő növényt!
-        </p>
-    </section>
-
-    <!-- NÖVÉNYGALÉRIA -->
-
-    <section id="galeria">
-        <h2>🌸 Növénygaléria</h2>
-
-        <input type="text" id="kereses"
-        placeholder="Keress növényre...">
-
-        <select id="kategoria">
-            <option value="osszes">Összes növény</option>
-            <option value="viragzo">Virágzó növények</option>
-            <option value="leveles">Levél dísznövények</option>
-        </select>
-
-        <div id="novenyek" class="kartyak"></div>
-    </section>
-
-    <!-- KEDVENCEK -->
-
-    <section id="kedvencek">
-        <h2>❤️ Kedvenc növényeim</h2>
-        <p>Itt találod az általad kedvencnek jelölt növényeket.</p>
-
-        <div id="kedvencek-lista" class="kartyak"></div>
-    </section>
-
-    <!-- ÖNTÖZÉS -->
-
-    <section id="ontozes">
-        <h2>💧 Öntözési emlékeztető</h2>
-        <p>Jelöld be, ha ma meglocsoltad a növényedet!</p>
-
-        <div id="ontozes-lista"></div>
-    </section>
-
-    <!-- KVÍZ -->
-
-    <section id="kviz">
-        <h2>🌺 Virágfelismerő kvíz</h2>
-
-        <div class="kviz-doboz">
-            <h3 id="kerdes">Teszteld a tudásodat!</h3>
-
-            <div id="valaszok"></div>
-
-            <p id="eredmeny"></p>
-
-            <button id="kovetkezo" onclick="kovetkezoKerdes()">
-                Kvíz indítása
-            </button>
+    <header>
+        <h1>Zöld Oázis Viráglexikon</h1>
+        <nav>
+            <a href="#fooldal">Főoldal</a>
+            <a href="#viragok">Virágok bemutatása</a>
+            <a href="#kapcsolat">Kapcsolat</a>
+        </nav>
+        <div class="kereso-doboz">
+            <input type="text" id="keresoInput" placeholder="Keresés virág nevére...">
         </div>
-    </section>
+    </header>
 
-    <!-- NÖVÉNYTESZT -->
+    <div class="kontener" id="fooldal">
+        
+        <section id="viragok">
+            <div class="szuro-kontener">
+    <div class="gombok">
+        <button class="szuro-gomb active" data-kategoria="mind">Minden növény</button>
+        <button class="szuro-gomb" data-kategoria="Benti">Benti növények</button>
+        <button class="szuro-gomb" data-kategoria="Kinti">Kinti növények</button>
+    </div>
+    <div id="szamlalo">Megjelenítve: <span id="darabSzam">0</span> virág</div>
 
-    <section id="teszt">
-        <h2>🌻 Milyen növény illik hozzád?</h2>
+            <h2>Ismerd meg a kedvenc növényeidet!</h2>
+            <div class="virag-racs">
+                
+                <div class="kartya" style="background-image: url('1.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Napraforgó</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Helianthus annuus</p>
+                        <p><strong>Típus:</strong> Kinti növény</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Közvetlen napsütéses, szélvédett kerti helyen</p>
+                        <p><strong>Öntözés:</strong> 2-3 naponta (kánikulában naponta)</p>
+                        <p><strong>Leírás:</strong> A napraforgó az egyik legismertebb és legkedveltebb nyári virágunk, amely fényigényéről vált híressé. Fiatal korában a virágfej a nap mozgását követi kelettről nyugatra. Szára rendkívül erős, magasra nő, akár a 2-3 méteres magasságot is elérheti. Nagy, sárga szirmai a nyári hangulatot idézik minden kertben. Magjai, a szotyola, emberi fogyasztásra és madáreledelként is kiválóak. Melegigényes növény, jól tűri a nyári hőséget, ha kap elég vizet. Tápanyagban gazdag, jó vízáteresztő talajt igényel a fejlődéshez. Vágott virágként is nagyon mutatós egy nagy vázában. Évente újra kell vetni, mivel egynyári növény.</p>
+                    </div>
+                </div>
 
-        <div class="teszt-doboz">
+                <div class="kartya" style="background-image: url('2.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Orchidea</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Phalaenopsis</p>
+                        <p><strong>Típus:</strong> Benti növény</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Világos, de közvetlen tűző naptól védett ablakpárkányon</p>
+                        <p><strong>Öntözés:</strong> 7-10 naponta (beáztatással, amikor a gyökerek elszürkülnek)</p>
+                        <p><strong>Leírás:</strong> A lepkeorchidea az egyik legnépszerűbb szobanövény különleges és hosszan tartó virágzata miatt. Eredetileg trópusi fák ágain él, így a gyökerei a levegőből és az esőből veszik fel a tápanyagot. Nem szokványos virágföldet, hanem speciális fenyőkéreg-keveréket igényel. Levelei vastagok, húsosak és sötétzöldek. Virágai hónapokig díszíthetik a lakást a legváltozatosabb színekben. Kifejezetten kedveli a szobahőmérsékletet és a magasabb páratartalmat. A pangó vizet nem bírja, a gyökerei könnyen rothadásnak indulnak tőle. Megfelelő gondoskodás mellett évente többször is új virágszárat hozhat.</p>
+                    </div>
+                </div>
 
-            <p>Mennyit foglalkoznál a növényeddel?</p>
+                <div class="kartya" style="background-image: url('3.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Levendula</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Lavandula angustifolia</p>
+                        <p><strong>Típus:</strong> Kinti növény</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Napos, meleg sziklakertben vagy virágágyásban.</p>
+                        <p><strong>Öntözés:</strong> 5-7 naponta (a szárazságot jól tűri)</p>
+                        <p><strong>Leírás:</strong> A levendula egy mediterrán származású, örökzöld cserje, amely illatáról és lila virágairól ismert. Nagyon jól bírja a szárazságot és a tűző napot, így kevés gondozást igényel. Virágzása a nyár elejére esik, amikor méhek és pillangók tömegeit vonzza a kertbe. Illóolaját nyugtató hatása miatt széles körben használják az aromaterápiában. A megszárított virágok kiválóan alkalmasak molyirtásra és szekrényillatosításra. Sziklakertekbe, utak szegélyére vagy dézsába ültetve is tökéletesen mutat. Tavaszi metszéssel megelőzhető, hogy a növény alja felkopaszodjon. Jó vízáteresztő, meszes talajban fejlődik a legszebben.</p>
+                    </div>
+                </div>
 
-            <select id="gondozas">
-                <option value="keves">Keveset</option>
-                <option value="kozepes">Néha</option>
-                <option value="sok">Sokat</option>
-            </select>
+                <div class="kartya" style="background-image: url('4.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Vitorlavirág</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Spathiphyllum</p>
+                        <p><strong>Típus:</strong> Benti növény</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Félárnyékos vagy világos, de szűrt fényű szobában</p>
+                        <p><strong>Öntözés:</strong> 4-5 naponta (ha kókad a levele, azonnal vizet kér)</p>
+                        <p><strong>Leírás:</strong> A vitorlavirág elegáns megjelenésű, elegáns szobanövény, amely zöld leveleivel és fehér virágzatával díszít. Ismert légtisztító képességéről, mivel hatékonyan szűri a levegőben lévő káros anyagokat. Kedveli a meleg és párás környezetet, így a fürdőszobában is jól érezheti magát. Virágai valójában módosult fellevelek, amelyek egy torzsavirágzatot vesznek körül. Nagyon egyértelműen jelzi a szomjúságot: levelei lankadtan leborulnak, ha száraz a földje. Öntözés után azonban meglepően gyorsan visszanyeri az alakját. A tűző nap elégetheti a leveleit, ezért árnyékosabb sarokba is rakható. Évente érdemes átültetni friss virágföldbe.</p>
+                    </div>
+                </div>
 
-            <p>Milyen növényt szeretnél?</p>
+                <div class="kartya" style="background-image: url('5.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Muskátli (Kerti muskátli)</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Pelargonium hortorum</p>
+                        <p><strong>Típus:</strong> Kinti növény (télen fagymentes helyen teleltetendő)</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Napos erkélyen, ablakpárkányon vagy teraszon</p>
+                        <p><strong>Öntözés:</strong> 1-2 naponta (nyári kánikulában naponta)</p>
+                        <p><strong>Leírás:</strong> A muskátli a balkonok és ablakpárkányok legelterjedtebb dísznövénye Közép-Európában. Tavasztól egészen az első őszi fagyokig folyamatosan hozza szines virágait. Kedveli a közvetlen napfényt, amely elengedhetetlen a bőséges virágzáshoz. Számos színváltozatban létezik, a fehértől a rózsaszínen át a sötétvörösig. Az elszáradt virágok és levelek rendszeres eltávolításával újabb bimbók képződését serkenthetjük. Bár fagyérzékeny, télen hűvös, fénytelen vagy világos pincében sikeresen teleltethető. Rendszeres tápoldatozást igényel a nyári növekedési időszakban. Szára és levelei jellegzetes, illatos aromaanyagokat tartalmaznak.</p>
+                    </div>
+                </div>
 
-            <select id="tipus">
-                <option value="leveles">Levél dísznövényt</option>
-                <option value="viragzo">Virágzó növényt</option>
-            </select>
+                <div class="kartya" style="background-image: url('6.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Szobafikusz</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Ficus elastica</p>
+                        <p><strong>Típus:</strong> Benti növény</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Világos, tágas szobában, ahol nincs kitéve huzatnak</p>
+                        <p><strong>Öntözés:</strong> 6-8 naponta (hagyjuk a talaj felső rétegét megszáradni)</p>
+                        <p><strong>Leírás:</strong> A szobafikusz egy klasszikus, mutatós szobanövény, amely nagy, fényes és viaszos leveleivel hívja fel magára a figyelmet. Megfelelő körülmények között gyorsan nő, és akár a szoba plafonjáig is megnőhet. Leveleit érdemes időnként nedves ruhával áttörölni a portól a jobb fotószintézis érdekében. A hirtelen hőmérséklet-változásra és a huzatra leveleinek elhullatási reakciójával válaszolhat. Kedveli a egyenletes szobahőmérsékletet egész évben. A túlöntözésre érzékeny, gyökerei sárguló levelekkel jelzik a túl sok vizet. Szára sérülés esetén mérgező, tejszerű nedvet ereszt ki. Kisebb lakásokban visszavágással tartható kordában a mérete..</p>
+                    </div>
+                </div>
 
-            <button onclick="novenyTeszt()">
-                Eredmény megtekintése
-            </button>
+                <div class="kartya" style="background-image: url('7.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Hortenzia</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Hydrangea macrophylla</p>
+                        <p><strong>Típus:</strong> Kinti növény (árnyékos teraszon cserépben is tartható)</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Félárnyékos, szélvédett kerti helyen.</p>
+                        <p><strong>Öntözés:</strong> 1-2 naponta (rendkívül vízigényes)</p>
+                        <p><strong>Leírás:</strong> A hortenzia hatalmas, gömb alakú virágzataival a kertek egyik legszebb dísze nyáron. A virágok színe a talaj kémhatásától függően változhat a rózsaszíntől a kékig. Mészkerülő növény, így a savanyú kémhatású talajt és a lágy öntözővizet kedveli. A tűző déli nap megégetheti a leveleit és elfonnyaszthatja a virágait. Névadása is utal hatalmas vízigényére, földjének sosem szabad teljesen kiszáradnia. Télire a tövét érdemes takarással védeni a keményebb fagyok ellen. Tavaszi metszésnél figyelni kell, mert sok fajta az előző évi vesszőkön hozza a virágait. Árnyékosabb udvarok vagy fák alatti területek kiváló szépítője.</p>
+                    </div>
+                </div>
 
-            <h3 id="ajanlas"></h3>
+                <div class="kartya" style="background-image: url('8.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Zöldliliom</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Chlorophytum comosum</p>
+                        <p><strong>Típus:</strong> Benti növény</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Szobában bárhol, a világostól a félárnyékos helyekig</p>
+                        <p><strong>Öntözés:</strong> 5-7 naponta</p>
+                        <p><strong>Leírás:</strong> A zöldliliom az egyik legellenállóbb és legkönnyebben gondozható szobanövény, így kezdőknek ideális. Hosszú, keskeny, zöld-fehér csíkos levelei fűszálakra emlékeztetnek. Indákat növeszt, melyek végén apró növénysarjak és kicsi fehér virágok fejlődnek. Ezekről a sarjakról rendkívül egyszerűen szaporítható vízben vagy közvetlenül földbe ültetve. Kiválóan alkalmas árasztó vagy függő kaspókba, perché levelei szép zuhatagot alkotnak. Rendkívül jó légtisztító, szűri a háztartási méreganyagokat. Elviseli a kevesebb fényt és a szabálytalan öntözést is. Húsos gyökereiben képes vizet raktározni a szárazabb időszakokra.</p>
+                    </div>
+                </div>
 
-        </div>
-    </section>
+                <div class="kartya" style="background-image: url('9.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Tulipán</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Tulipa</p>
+                        <p><strong>Típus:</strong> Kinti növény</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Napos vagy félárnyékos kerti ágyásban</p>
+                        <p><strong>Öntözés:</strong> 4-6 naponta (ha tavaszi esőzés nincs)</p>
+                        <p><strong>Leírás:</strong> A tulipán a tavasz egyik legnépszerűbb hagymás virága, amely számtalan színben és formában létezik. Hagymáit ősszel kell a földbe ültetni, hogy a téli hideg hatására tavasszal kihajtsanak. Kora tavasztól májusig virágzik, az egyik első színfoltot adva a kertnek. A virágzás után a leveleket hagyni kell maguktól megsárgulni és elszáradni, hogy a hagyma feltöltődjön. Szára egyenes, egyetlen kehely alakú virágot hordoz a tetején. Vágott virágként a vázában is napokig díszít, bár a szára vízben tovább nyúlhat. A rágcsálók és pocokkártevők ellen hagymakosárba ültetve védekezhetünk. A virágzás végeztével a hagymák felszedhetők és őszig száraz helyen tárolhatók.</p>
+                    </div>
+                </div>
+                <div class="kartya" style="background-image: url('10.jpg');">
+                    <div class="kartya-fejlec">
+                        <h3>Pozsgás / Kövirózsa</h3>
+                        <span>(Kattints a részletekért)</span>
+                    </div>
+                    <div class="leiras">
+                        <p><strong>Latin név:</strong> Sempervivum</p>
+                        <p><strong>Típus:</strong> Kinti növény (sziklakerti fajta; léteznek beltéri pozsgások is)</p>
+                        <p><strong>Tárolás/Helyigény:</strong> Tűző napos sziklakertben vagy tetőkerten</p>
+                        <p><strong>Öntözés:</strong> 10-14 naponta (nagyon ritkán, jól bírja a szárazságot)</p>
+                        <p><strong>Leírás:</strong> A kövirózsa egy rendkívül szívós, örökzöld pozsgás növény, amely rózsa alakú levélrózsákat képez. Vastag, húsos leveleiben tárolja a vizet, így a leghosszabb szárazságot is könnyen átvészeli. Teljesen télálló, a fagyos magyar telek sem tesznek kárt benne. Sziklakertek, kőfalak rései és edények ideális dísze, ahol kevés a termőföld. Virágzáskor a levélrózsa közepéből egy magasabb virágszál nyúlik ki. A virágzást követően az az egy levélrózsa elpusztul, de addigra számtalan fióknövényt nevel maga körül. Öntözni csak kifejezetten tartós kánikula idején szükséges. A pangó vizet és a kötött, nedves talajt nem bírja, mert a gyökerei elrothadnak.</p>
+                    </div>
+                </div>
+              
+                <div class="kartya" style="background-image: url('11.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Rózsa</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Rosa</p>
+                    <p><strong>Típus:</strong> Kinti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Napos, szellős kerti helyen.</p>
+                    <p><strong>Öntözés:</strong> 3-4 naponta (kánikulában gyakrabban, a tövénél öntözve).</p>
+                    <p><strong>Leírás:</strong> A rózsa a virágok királynője, amely évszázadok óta a szépség és a szerelem szimbóluma. Számtalan színben, formában és illatváltozatban létezik a futórózsáktól a bokorrózsákig. Kedveli a közvetlen napfényt és a tápanyagban gazdag, jó vízáteresztő talajt. Az elnyílt virágok rendszeres metszésével újabb virágzásra serkenthetjük. Fontos, hogy az öntözés során a leveleit ne érje víz a gombás megbetegedések megelőzése érdekében. Tavaszi metszése elengedhetetlen a szép forma és bőséges virágzás eléréséhez. Télire a tövét érdemes földdel feltölteni a fagymentesítés miatt. Megfelelő gondoskodással egész nyáron át díszíti a kertet.</p>
+                </div>
+            </div>
 
-</main>
+            <div class="kartya" style="background-image: url('12.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Legényvirág (Zinnia)</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Zinnia elegans</p>
+                    <p><strong>Típus:</strong> Kinti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Meleg, meleg fényű, napos virágágyásban.</p>
+                    <p><strong>Öntözés:</strong> 2-3 naponta.</p>
+                    <p><strong>Leírás:</strong> A legényvirág egy rendkívül hálás, élénk színekben pompázó egynyári kerti növény. Szirmai a sárgától a narancssárgán és rózsaszínen át a mélyvörösig számtalan árnyalatban tündökölnek. Nagyon kedveli a tűző napot és a meleg nyári időjárást. Vágott virágként is kiváló, vázában hosszú ideig friss és mutatós marad. Virágai folyamatosan nyílnak kora nyártól egészen az első őszi fagyokig. Vonzó a pillangók és a beporzó rovarok számára, így élettel tölti meg a kertet. Jó vízáteresztő talajt igényel, a túlzott párát és a gombásodást nem szereti. Magról rendkívül könnyen szaporítható akár szabadföldbe vetve is.</p>
+                </div>
+            </div>
 
-<footer>
-    <p>🌿 Zöld Oázis | Készült iskolai projektként</p>
-</footer>
+            <div class="kartya" style="background-image: url('13.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Anyósnyelv</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Sansevieria trifasciata</p>
+                    <p><strong>Típus:</strong> Benti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Világostól az árnyékosabb szobai sarkokig bárhol.</p>
+                    <p><strong>Öntözés:</strong> 10-14 naponta (két öntözés között hagyjuk teljesen kiszáradni).</p>
+                    <p><strong>Leírás:</strong> Az anyósnyelv az egyik legszívósabb és legkevesebb törődést igénylő szobanövény. Hosszú, kard alakú, kemény levelei függőlegesen felfelé nőnek, zöld-sárga mintázattal. Kifejezetten jó légtisztító növény, amely éjszaka is oxigént termel. Remekül bírja a száraz levegőt és a fényszegény helyiségeket is. Egyetlen igazi ellensége a túlöntözés, ami a gyökerek és levelek rothadásához vezet. Kezdő növénytartók számára a legideálisabb választás az otthonokba vagy irodákba. Lassú növekedésű, így ritkán igényel átültetést. Kisebb cserépben is évekig szépen fejlődik.</p>
+                </div>
+            </div>
 
-<script src="script.js"></script>
+            <div class="kartya" style="background-image: url('14.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Pünkösdi rózsa (Babarózsa)</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Paeonia lactiflora</p>
+                    <p><strong>Típus:</strong> Kinti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Napos vagy enyhén félárnyékos kerti ágyásban.</p>
+                    <p><strong>Öntözés:</strong> 4-5 naponta (virágzási időben több vizet igényel).</p>
+                    <p><strong>Leírás:</strong> A pünkösdi rózsa hatalmas, illatos, tömvetelt virágairól ismert évelő kerti növény. Késő tavasztól nyár elejéig virágzik, elbűvölő rózsaszín, fehér vagy piros színekben. Hosszú életű növény, egy adott helyen akár évtizedekig is elél anélkül, hogy át kellene ültetni. Hatalmas virágfejei a záporok után elnehezedhetnek, ezért érdemes támasztékot biztosítani számára. Tápanyagban gazdag, mély rétegű talajt és napfényt igényel a bőséges virágzáshoz. Ősszel a szárai visszaszáradnak, majd tavasszal újra erőteljesen kihajtanak. Vágott virágként a tavaszi csokrok egyik legnépszerűbb eleme. Gyökere érzékeny a bolygatásra, így helyét érdemes körültekintően megválasztani.</p>
+                </div>
+            </div>
 
+            <div class="kartya" style="background-image: url('15.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Flamingóvirág</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Anthurium andreanum</p>
+                    <p><strong>Típus:</strong> Benti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Meleg, világos, de közvetlen tűző naptól védett helyen.</p>
+                    <p><strong>Öntözés:</strong> 5-7 naponta (mészmentes, langyos vízzel).</p>
+                    <p><strong>Leírás:</strong> A flamingóvirág különleges, viaszos hatású, szív alakú felleveleivel és sárga torzsavirágzatával díszít. A leggyakoribb a piros színű változat, de rózsaszín és fehér árnyalatban is létezik. Trópusi eredete miatt kedveli a magas páratartalmat és az egyenletes meleget. Leveleit érdemes rendszeresen permetezni vagy nedves ruhával törölgetni. A hideg huzatot és a pangó vizet kifejezetten rosszul tűri. Megfelelő körülmények között egész évben folyamatosan hozhatja új virágait. Tőzeges, jó vízáteresztő virágföldkeveréket igényel a fejlődéshez. Szobánk elegáns és egzotikus dísze lehet hosszú éveken át.</p>
+                </div>
+            </div>
+
+            <div class="kartya" style="background-image: url('16.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Aranyeső (Aranycserje)</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Forsythia x intermedia</p>
+                    <p><strong>Típus:</strong> Kinti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Napos vagy félárnyékos kerti szabad térben.</p>
+                    <p><strong>Öntözés:</strong> 7-10 naponta (beállt cserjeként csak tartós szárazságban).</p>
+                    <p><strong>Leírás:</strong> Az aranycserje a kora tavasz egyik legelső és leglátványosabb hírnöke a kertekben. Mielőtt a levelei kihajtanának, ágait elborítják a ragyogó sárga virágok. Gyors növekedésű, lombhullató cserje, amely sövényként vagy szoliter növényként is ültethető. Teljesen télálló, a hazai éghajlatot és a várostűrést is jól viseli. Virágzás után érdemes erőteljesen visszametszeni az ágakat a követező évi bőséges virágzásért. Talajban nem válogatós, az átlagos kerti földben is szépen fejlődik. Tavaszi virágzó ágai vázába téve a lakásban is korán kibontakoznak. Magassága és szélessége a 2-3 métert is könnyen elérheti.</p>
+                </div>
+            </div>
+
+            <div class="kartya" style="background-image: url('17.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Legénypálma (Zamioculcas)</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Zamioculcas zamiifolia</p>
+                    <p><strong>Típus:</strong> Benti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Világostól a félárnyékos vagy sötétebb szobai helyekig.</p>
+                    <p><strong>Öntözés:</strong> 10-14 naponta (két öntözés között a földje száradjon ki).</p>
+                    <p><strong>Leírás:</strong> A legénypálma vagy agglegénypálma az egyik legmodernebb és legellenállóbb beltéri dísznövény. Vastag, húsos szárain sötétzöld, viaszos fényű levelek sorakoznak szimmetrikusan. Föld alatti gumóiban képes nagy mennyiségű vizet raktározni a szárazabb időszakokra. Nagyon jól bírja a fényszegény irodai környezetet és a rendszertelen gondozást. Egyetlen gyengéje a túlöntözés, ami a gumók és szárak rothadását okozza. Kártevők ritkán támadják meg, így rendkívül könnyen tartható növény. Lassan nő, de idővel tekintélyes méretű bokorrá fejlődhet. Minimális odafigyeléssel is folyamatosan megőrzi szép, fényes külsejét.</p>
+                </div>
+            </div>
+
+            <div class="kartya" style="background-image: url('18.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Körömvirág</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Calendula officinalis</p>
+                    <p><strong>Típus:</strong> Kinti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Napos kerti ágyásban vagy veteményesben.</p>
+                    <p><strong>Öntözés:</strong> 3-4 naponta.</p>
+                    <p><strong>Leírás:</strong> A körömvirág egy közismert gyógynövény és egyben mutatós egynyári kerti virág. Élénk sárga és narancssárga virágai kora nyártól késő őszig folyamatosan nyílnak. Kifejezetten jó hatással van a veteményeskertre, mert távol tartja a kártevőket és a fonalférgeket. Virágjának szirmait a népi gyógyászatban sebgyógyító és gyulladáscsökkentő krémekhez használják. Nagyon könnyen szaporodik, az elhullajtott magvakból kora tavasszal magától is kihajt. Kedveli a napsütést és a jó vízáteresztő, átlagos kerti talajt. Az elszáradt virágfejek rendszeres szedésével újabb bimbók nevelésére serkenthető. Balkonládában és virágágyás szegélyként egyaránt nagyszerűen mutat.</p>
+                </div>
+            </div>
+
+            <div class="kartya" style="background-image: url('19.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Klasszikus Kaktusz</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Echinocactus grusonii</p>
+                    <p><strong>Típus:</strong> Benti növény (nyáron kint is tartható)</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Közvetlen tűző napos ablakpárkányon vagy teraszon.</p>
+                    <p><strong>Öntözés:</strong> 14-21 naponta (télen szinte egyáltalán nem igényel vizet).</p>
+                    <p><strong>Leírás:</strong> A klasszikus gömbkaktusz vagy "anyósülés" kaktusz a sivatagi növények ikonikus képviselője. Bordázott, gömb alakú testét erős, sárgás tüskék borítják védelmül. Fejlődéséhez elengedhetetlen a maximális napfény és a nagyon kevés víz. Speciális kaktuszföldben és kiváló vízáteresztő cserépben érzi jól magát. Télen hűvös, száraz helyen kell teleltetni öntözés nélkül a tavaszi virágzás elősegítéséhez. Nem bírja a pangó vizet, a túlöntözéstől a növény teste gyorsan elrothadhat. Rendkívül lassan nő, de nagyon hosszú életű szobanövény. Kezdő pozsgáskedvelők számára elengedhetetlen darab a gyűjteményben.</p>
+                </div>
+            </div>
+
+            <div class="kartya" style="background-image: url('20.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Bársonyvirág (Büdöske)</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Tagetes patula</p>
+                    <p><strong>Típus:</strong> Kinti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Napos vagy enyhén félárnyékos virágágyásban.</p>
+                    <p><strong>Öntözés:</strong> 2-3 naponta.</p>
+                    <p><strong>Leírás:</strong> A bársonyvirág a magyar kertek egyik legelterjedtebb és legellenállóbb egynyári virága. Sárga, narancs és barnáspiros színekben pompázó virágai egész nyáron át díszítenek. Jellegzetes, erős illata miatt sokan büdöskének hívják, ami elriasztja a kártevőket. Veteményesek szegélyére ültetve védelmet nyújt a paradicsom és más zöldségek számára. Igen igénytelen, a gyengébb minőségű talajban és kánikulában is szépen virágzik. Az elnyílt virágokat eltávolítva még bőségesebb új virágzást érhetünk el. Magjai ősszel könnyen gyűjthetők és a következő tavasszal elvethetők. Edényekben, balkonládákban és sziklakertekben is remekül fejlődik.</p>
+                </div>
+            </div>
+
+            <div class="kartya" style="background-image: url('21.jpg');">
+                <div class="kartya-fejlec">
+                    <h3>Fátyolka (Asparagus)</h3>
+                    <span>(Kattints a részletekért)</span>
+                </div>
+                <div class="leiras">
+                    <p><strong>Latin név:</strong> Asparagus setaceus</p>
+                    <p><strong>Típus:</strong> Benti növény</p>
+                    <p><strong>Tárolás/Helyigény:</strong> Világos vagy félárnyékos, közvetlen naptól védett helyen.</p>
+                    <p><strong>Öntözés:</strong> 4-5 naponta (földje legyen mindig enyhén nedves).</p>
+                    <p><strong>Leírás:</strong> A fátyolka vagy díszspárga egy finom, pelyhes hatású, tetszetős szobanövény. Apró, tűszerű hajtásai finom hálót képeznek, ami lágy megjelenést kölcsönöz neki. Kedveli a párás környezetet, így a levelek rendszeres permetezése meghálálja magát. A közvetlen, erős napfény megégetheti a finom hajtásokat és besárgíthatja őket. Ha a földje túlságosan kiszárad, a növény elhullathatja apró tűleveleit. Gyönyörűen mutat függőkosarakban vagy más magasabb növények társaságában. Tápanyagban dús, jó vízáteresztő földkeveréket igényel a növekedéshez. Vágott zöldként virágcsokrok díszítésére is gyakran használják.</p>
+                </div>
+            </div>
+            <div class="kartya" style="background-image: url('22.jpg');">
+    <div class="kartya-fejlec">
+        <h3>Kamélia</h3>
+        <span>(Kattints a részletekért)</span>
+    </div>
+    <div class="leiras">
+        <p><strong>Latin név:</strong> Camellia japonica</p>
+        <p><strong>Típus:</strong> Kinti-benti növény (hűvös helyet kedvelő)</p>
+        <p><strong>Tárolás/Helyigény:</strong> Világos, de védett, hűvös helyen (télen fagymentes, világos verandán).</p>
+        <p><strong>Öntözés:</strong> 4-5 naponta (mészmentes, lágy vízzel).</p>
+        <p><strong>Leírás:</strong> A kamélia a téli és kora tavaszi időszak egyik legpompásabb, rózsaszerű virágokkal díszítő cserjéje. Sötétzöld, fényes levelei egész évben elegáns megjelenést biztosítanak számára. Savanyú talajt és egyenletesen nedves, de nem tocsogó földet igényel. Érzékeny a helyváltoztatásra, a bimbós állapotban lévő növény könnyen elhullajthatja a virágait, ha huzat éri. Nem szereti a túlzott meleget, lakásban tartva gyakran elpusztul, de egy hűvös télikertben vagy lépcsőházban csodásan él. Virágai lenyűgöző formájúak, telt szirmúak, fehér, rózsaszín vagy piros színben pompáznak. Metszését közvetlenül a virágzás után érdemes elvégezni.</p>
+    </div>
+</div>
+
+<div class="kartya" style="background-image: url('23.jpg');">
+    <div class="kartya-fejlec">
+        <h3>Leander (Babérrózsa)</h3>
+        <span>(Kattints a részletekért)</span>
+    </div>
+    <div class="leiras">
+        <p><strong>Latin név:</strong> Nerium oleander</p>
+        <p><strong>Típus:</strong> Kinti növény (dézsás, fagymentes teleltetést igényel)</p>
+        <p><strong>Tárolás/Helyigény:</strong> Teljesen napos, szélvédett teraszon vagy kertben.</p>
+        <p><strong>Öntözés:</strong> 1-2 naponta (nyáron akár naponta, bőségesen).</p>
+        <p><strong>Leírás:</strong> A leander egy csodálatos mediterrán dézsás növény, amely hatalmas virágfürtjeivel hódít a nyár folyamán. Virágai lehetnek szimplák vagy teltek, fehér, sárga, rózsaszín, piros vagy akár márványos színűek is. Imádja a tűző napot és a meleget, minél több napsütést kap, annál gazdagabban virágzik. Rendkívül vízigényes, nyáron gyakran állhat a vizes alátétben is. Tápanyagigénye magas, ezért rendszeres heti tápoldatozást hálál meg a leginkább. Fagyérzékeny, így a teleket egy világos, hűvös, de fagymentes helyiségben kell töltenie. Fontos tudni, hogy a növény minden része mérgező, ezért metszése során óvatosan kell eljárni.</p>
+    </div>
+</div>
+
+            </div>
+        </section>
+
+        <section id="kapcsolat">
+            <h2>Kérdezz tőlünk szakértői szinten!</h2>
+            <form id="kapcsolatForm" class="urlap-doboz">
+                <div class="urlap-csoport">
+                    <label for="nev">Teljes név:</label>
+                    <input type="text" id="nev" required placeholder="Kovács Anna">
+                </div>
+
+                <div class="urlap-csoport">
+                    <label for="telefon">Telefonszám:</label>
+                    <input type="text" id="telefon" required placeholder="06301234567">
+                    <div id="telefonHiba" class="hiba-uzenet">A telefonszámnak 06-tal kell kezdődnie és pontosan 11 számjegyből kell állnia!</div>
+                </div>
+
+                <div class="urlap-csoport">
+                    <label for="uzenet">Kérdés a virágokról:</label>
+                    <textarea id="uzenet" rows="3" placeholder="Írd ide a kérdésedet..."></textarea>
+                </div>
+
+                <button type="submit">Üzenet elküldése</button>
+            </form>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Zöld Oázis Viráglexikon. Minden jog fenntartva.</p>
+    </footer>
+
+    <script src="script.js"></script>
+<button id="topGomb" title="Vissza a tetejére">&#8593;</button>
 </body>
 </html>
