@@ -233,6 +233,7 @@ footer {
 }
 
 .szuro-gomb {
+    margin-top: 25px;
     width: auto;
     display: inline-block;
     background-color: #e0e0e0;
